@@ -6,6 +6,8 @@
  * Time: 11:06 AM
  */
 
+namespace user\Model;
+
 interface UserCommandInterface
 {
     public function insertUser(User $user);

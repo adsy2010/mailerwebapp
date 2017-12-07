@@ -11,7 +11,8 @@ require_once 'includes.inc';
 if(isset($_GET['module']))
 {
     $module = $_GET['module'];
-    require_once "/./modules/{$module}/config.php";
+    require_once "/./modules/{$module}/Module.php";
+    $module = new $module.\Module();
 }
 
 $content = "This is test content";

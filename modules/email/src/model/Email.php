@@ -6,6 +6,8 @@
  * Time: 10:58 AM
  */
 
+namespace email\Model;
+
 class Email
 {
     private $id, $user, $time, $sendto, $subject, $content;

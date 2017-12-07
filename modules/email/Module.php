@@ -6,6 +6,8 @@
  * Time: 3:30 PM
  */
 
+namespace email;
+
 class Module
 {
     public function getConfig()

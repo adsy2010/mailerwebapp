@@ -6,6 +6,8 @@
  * Time: 11:07 AM
  */
 
+namespace user\Model;
+
 interface UserRepositoryInterface
 {
     public function getUserByCredentials($username, $password);

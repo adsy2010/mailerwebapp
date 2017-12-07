@@ -6,6 +6,8 @@
  * Time: 11:40 AM
  */
 
+namespace email\Model;
+
 interface EmailRepositoryInterface
 {
     public function getEmail($id);

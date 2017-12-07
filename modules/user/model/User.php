@@ -6,6 +6,8 @@
  * Time: 10:57 AM
  */
 
+namespace user\Model;
+
 class User
 {
     private $id, $email, $password, $fullname, $active, $activationcode;

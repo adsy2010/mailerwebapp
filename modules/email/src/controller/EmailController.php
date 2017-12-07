@@ -6,6 +6,8 @@
  * Time: 11:39 AM
  */
 
+namespace email\Controller;
+
 class EmailController
 {
 

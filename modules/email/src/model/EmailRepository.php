@@ -6,6 +6,8 @@
  * Time: 11:40 AM
  */
 
+namespace email\Model;
+
 class EmailRepository implements EmailRepositoryInterface
 {
     private $db;

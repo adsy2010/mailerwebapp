@@ -6,6 +6,8 @@
  * Time: 11:09 AM
  */
 
+namespace user\Model;
+
 class UserCommand implements UserCommandInterface
 {
     private $db;

@@ -6,6 +6,8 @@
  * Time: 3:42 PM
  */
 
+namespace user;
+
 class Module
 {
     public function getConfig()
