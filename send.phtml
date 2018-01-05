@@ -7,7 +7,8 @@
  */
 require_once 'Scripts.php';
 
-if(isset($_POST['send'])) $script->sendEmail($_POST['email'], $_POST['subject'], $_POST['content'] . $script->getEmailTemplate('signature'));
+if(isset($_SESSION['user']))
+    if(isset($_POST['send'])) $script->sendEmail($_POST['email'], $_POST['subject'], $_POST['content'] . $script->getEmailTemplate('signature'));
 ?>
 <!doctype html>
 <html>
