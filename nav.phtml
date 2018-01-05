@@ -1,0 +1,48 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: awt
+ * Date: 12/12/2017
+ * Time: 11:09 AM
+ */
+?>
+<div class="container">
+    <nav class="navbar navbar-inverse bg-primary" style="padding: 15px;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" style="margin-top:-35px; margin-bottom: 10px; width:250px;">
+                    <span><h2><img src="/tools/mailer/images/logo.png" alt="" height="50px;"> Emailer</h2></span>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/tools/mailer">Home</a></li>
+                    <?php if(isset($_SESSION['user'])): ?>
+    <li><a href="/tools/mailer/send.phtml">Send email</a></li>
+    <li><a href="/tools/mailer/myEmails.phtml">My emails</a></li>
+    <li><a href="/tools/mailer/logout.phtml">Logout</a></li>
+<?php endif; ?>
+</ul>
+<?php if(isset($_SESSION['admin'])): ?>
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="/tools/mailer/admin/register.phtml">Register User</a></li>
+                <li><a href="/tools/mailer/admin/users.phtml">Users</a></li>
+		<li><a href="/tools/mailer/admin/allEmails.phtml">All Emails</a></li>
+            </ul>
+        </li>
+    </ul>
+<?php endif; ?>
+</div><!--/.nav-collapse -->
+</div><!--/.container-fluid -->
+</nav>
+
+</div>
