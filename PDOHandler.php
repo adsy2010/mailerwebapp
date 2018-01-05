@@ -10,21 +10,25 @@ class PDOHandler extends PDO
 {
     public function __construct()
     {
-        parent::__construct('mysql:host=localhost;dbname=ncs_mailer;charset=utf8', "root", "root");
+        parent::__construct('mysql:host=localhost;dbname=mailer;charset=utf8', "root", "root");
     }
 
     public function runQuery($query, $data = array())
     {
         try {
-            $stmt = $this->prepare($query);
-            if (sizeof($data) > 0) $stmt->execute($data);
-            else $stmt->execute();
+            if(!($stmt = $this->prepare($query)))
+                throw new Exception("Prepared query failed!");
+            if (sizeof($data) > 0) $result = $stmt->execute($data);
+            else $result = $stmt->execute();
         }
         catch(Exception $ex)
         {
             return $ex;
         }
-        return $stmt->fetchAll();
+        //return results or true/false
+        $allRows =  $stmt->fetchAll();
+        if(count($allRows) > 0) return $allRows;
+        else return $result;
     }
 
     public function getLastId()

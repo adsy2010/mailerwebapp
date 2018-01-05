@@ -1,0 +1,78 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: awt
+ * Date: 11/12/2017
+ * Time: 1:40 PM
+ */
+require_once '../Scripts.php';
+
+if(isset($_POST['activate'])) $script->sendActivation($_POST['user']);
+if(isset($_POST['remove'])) $script->deactivate($_POST['user']);
+if(isset($_POST['update'])) $status = $script->updateUser($_POST);
+
+$users = $script->listUsers();
+$userCount = count($users);
+//switch($_POST)
+//print_r($_POST);
+
+?>
+
+<!doctype html>
+<html>
+<head>
+    <title>Send Email</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"  type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<?php include '../nav.phtml'; ?>
+
+<div class="container">
+    <?php if(!isset($_SESSION['admin'])) die("<div class='alert alert-danger'><strong>Unauthorised access!</strong> You do not have access to this page!</div>"); ?>
+    <?php if(isset($status)):?>
+    <div class='alert alert-success'><strong>Success!</strong> <?= $status ?></div>
+    <?php endif; ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h1>Users</h1></div>
+        <div class="panel-body">
+	Update each line individually, each line is a separate entity. By changing the active status tickbox,
+    you are overriding the activation system. If you untick, the activation code for the user
+    will remain the same and they will be able to reactivate from their previous activation
+    link still. If you wish to deactivate fully, please use the deactivate button instead.<br><br>
+            <table class="table table-striped">
+                <tr>
+                    <th>Email Address</th>
+                    <th>Name</th>
+                    <th>Active</th>
+                    <th>Options</th>
+                </tr>
+                <?php foreach ($users as $user): ?>
+<form method="post">
+<input type=hidden name="user" value="<?= $user['id'] ?>">
+                    <tr>
+                        <td><input class="form-control" type="email" name="email" value="<?= $user['email'] ?>"></td>
+                        <td><input class="form-control" type="fullname" name="fullname" value="<?= $user['fullname'] ?>"></td>
+                        <td><input type="checkbox" name="active" <?= ($user['active'] == 1)? "checked":"" ?>></td>
+                        <td>
+                            <button class="btn btn-primary" name="update">Update</button>
+                            <button class="btn btn-warning" name="activate">Send Activation Email</button>
+                            <button class="btn btn-danger" name="remove">Deactivate</button>
+                        </td>
+                    </tr>
+</form>
+                <?php endforeach; ?>
+            </table>
+            Total users: <?= $userCount ?>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>

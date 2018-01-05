@@ -1,0 +1,50 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: awt
+ * Date: 13/12/2017
+ * Time: 12:48 PM
+ */
+
+require_once 'Scripts.php';
+
+?>
+
+<!doctype html>
+<html>
+<head>
+    <title>Send Email</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"  type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<?php include 'nav.phtml'; ?>
+
+<div class="container">
+    <?php if(!isset($_SESSION['user']))
+        die("<div class='alert alert-danger'><strong>Unauthorised access!</strong> You do not have access to this page!</div>Please <a href='/tools/mailer/login.phtml'>login.</a> ");
+    ?>
+    <?php if(!isset($_GET['id']))
+        die("<div class='alert alert-warning'><strong>No email selected!</strong> Please ensure you have selected an email you have access to!</div> ");
+        
+    $email = $script->getEmail($_GET['id']);
+    if($email == null) 
+	die("<div class='alert alert-warning'><strong>Email error!</strong> You have selected an email which does not exist or which you do not have permission to view!</div> ");
+?>
+    <div class="panel panel-primary">
+	<div class="panel-heading"><h2><?= $email['subject'] ?></h2></div>
+	<div class="panel-body"><?= $email['content'] ?></div>
+    </div>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+

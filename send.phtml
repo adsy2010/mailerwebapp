@@ -1,0 +1,55 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: awt
+ * Date: 12/12/2017
+ * Time: 11:49 AM
+ */
+require_once 'Scripts.php';
+
+if(isset($_POST['send'])) $script->sendEmail($_POST['email'], $_POST['subject'], $_POST['content'] . $script->getEmailTemplate('signature'));
+?>
+<!doctype html>
+<html>
+<head>
+    <title>Send Email</title>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css"  type="text/css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<?php include 'nav.phtml' ?>
+
+<div class="container">
+    <?php if(!isset($_SESSION['user']))
+        die("<div class='alert alert-danger'><strong>Unauthorised access!</strong> You do not have access to this page!</div>Please <a href='/tools/mailer/login.phtml'>login.</a> ");
+    ?>
+    <div class="panel panel-primary">
+        <div class="panel-heading"><h1>Send an Email</h1></div>
+        <div class="panel-body">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label>Email address(es). Separate address with a semi colon ( ; )</label>
+                    <input class="form-control" name="email" type="email" placeholder="someone@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input class="form-control" name="subject" type="text" placeholder="Subject" required>
+                </div>
+                <div class="form-group">
+                    <label>Email content</label>
+                    <textarea class="form-control" name="content" placeholder="Email content" rows="5" required></textarea>
+                </div>
+                <input type="submit" name="send" value="Send" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
+
